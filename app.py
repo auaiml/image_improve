@@ -67,27 +67,25 @@ def crop_document(image):
     return warped  
 
 #frontend
-def main():  
-    st.title("Document Cropper")  
-      
-    uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])  
-      
-    if uploaded_file is not None:  
-        image = Image.open(uploaded_file)  
-        image = np.array(image)  
-          
-        st.image(image, caption='Uploaded Image', use_column_width=True)  
-          
-        if st.button("Crop Document"):  
-            try:  
-                cropped_image = crop_document(image)  
-                st.image(cropped_image, caption='Cropped Image', use_column_width=True)  
-                  
-                # Allow user to download the cropped image  
-                result = Image.fromarray(cropped_image)  
-                st.download_button("Download Cropped Image", data=result.tobytes(), file_name="cropped_image.png", mime="image/png")  
-            except ValueError as e:  
-                st.error(f"Error: {e}")  
+ 
+st.title("Document Cropper")  
+
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])  
+
+if uploaded_file is not None:  
+    image = Image.open(uploaded_file)  
+    image = np.array(image)  
   
-if __name__ == "__main__":  
-    main()  
+st.image(image, caption='Uploaded Image', use_column_width=True)  
+  
+if st.button("Crop Document"):  
+    try:  
+        cropped_image = crop_document(image)  
+        st.image(cropped_image, caption='Cropped Image', use_column_width=True)  
+          
+        # Allow user to download the cropped image  
+        result = Image.fromarray(cropped_image)  
+        st.download_button("Download Cropped Image", data=result.tobytes(), file_name="cropped_image.png", mime="image/png")  
+    except ValueError as e:  
+        st.error(f"Error: {e}")  
+  
