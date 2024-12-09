@@ -1,5 +1,5 @@
 import streamlit as st
-import cv2
+import opencv as cv2
 from PIL import Image  
 import numpy as np
 
